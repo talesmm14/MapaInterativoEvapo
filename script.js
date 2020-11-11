@@ -1,7 +1,7 @@
 // initialize the map
 var map = L.map('map', {
   center: [-10.25, -48.25],
-  zoom: 6
+  zoom: 5
 });
 
 // add map layer (OpenStreetMap)
@@ -143,16 +143,17 @@ L.geoJSON(geojsonFeature, {
   // style features based on properties
   style: function(feature) {
     switch(feature.properties.prop0){
-      case '1': return { color: "black" }
-      case '2': return { color: "red" }
+      case '1': return { color: "blue" }
+      case '2': return { color: "blue" }
       case '3': return { color: "blue" }
-      case '4': return { color: "green" }
-      case '5': return { color: "yellow" }
+      case '4': return { color: "blue" }
+      case '5': return { color: "blue" }
       case '6': return { color: "blue" }
-      case '7': return { color: "magenta" }
-      case '9': return { color: "cyan" }
-      case '9': return { color: "white" }
-      case '10': return { color: "gray" }
+      case '7': return { color: "blue" }
+      case '8': return { color: "blue" }
+      case '9': return { color: "blue" }
+      case '9': return { color: "blue" }
+      case '10': return { color: "blue" }
     }
   }, // bind tooltip to each feature
   onEachFeature: function(feature, layer) {
