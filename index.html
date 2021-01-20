@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - GEOJSON with Leaflet</title>
+  <title>Mapa Evapotraspiração Tocantins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
     integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
@@ -34,6 +34,15 @@
               <section class="col col-3">
                 <label class="input">
                   <input id="Longitude" placeholder="Longitude" name="Location.Longitude" /></label>
+                </label>
+              </section>
+              <section class="col col-3">
+                <label class="input">
+                  <input id="dia_juliano" type="number" min="1" max="356" value="1">
+                </label>
+              </section>
+              <section class="col col-3">
+                  <div id="myData"></div>
               </section>
             </div>
           </section>
@@ -42,7 +51,7 @@
     <!-- partial -->
     <script src="./script.js"></script>
     <script src="./dados.js"></script>
-    
+
 </body>
 
 </html>

@@ -138,10 +138,28 @@ var geojsonFeature = {
     }
   ]
 };
+
+
 function onLayerClick(num) {
   lat = num.target.feature.properties.prop1.lat;
   lon = num.target.feature.properties.prop1.lon;
-	console.log(dados[0][lat][lon]);
+  data = (dados[(document.getElementById("dia_juliano").value)-1][lat][lon]);
+  //console.log(data);
+  appendData(data);
+}
+
+function appendData(data) {
+  var mainContainer = document.getElementById("myData");
+    var div = document.createElement("div");
+    div.innerHTML = 
+    'ET0HS: '       + data['ET0HS'] + 
+    'ET0IV: '       + data['ET0IV'] + 
+    'Radiação: '    + data['Radiação'] + 
+    'Temp Max: '    + data['Temp Max'] + 
+    'Temp Min: '    + data['Temp Min'] + 
+    'Temp Média: '  + data['Temp Média'] + 
+    'Umidade: '     + data['Umidade'];
+    mainContainer.appendChild(div);
 }
 
 // load GEOJSON object/array to map
@@ -163,9 +181,11 @@ L.geoJSON(geojsonFeature, {
     }
   }, // bind tooltip to each feature
   onEachFeature: function (feature, layer, dados) {
+    lat = feature.properties.prop1.lat;
+    lon = feature.properties.prop1.lon;
     // check if specific property is existing
     if (feature.properties.prop0) {
-      layer.bindTooltip("Quadrante: " + feature.properties.prop0);
+      layer.bindTooltip("Quadrante: " + lat + " | " + lon);
       layer.addEventListener('click',onLayerClick,feature.properties.prop0);
     }
   }
