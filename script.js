@@ -143,23 +143,40 @@ var geojsonFeature = {
 function onLayerClick(num) {
   lat = num.target.feature.properties.prop1.lat;
   lon = num.target.feature.properties.prop1.lon;
-  data = (dados[(document.getElementById("dia_juliano").value)-1][lat][lon]);
-  //console.log(data);
+  data = (dados[parseInt((document.getElementById("dia_juliano").value) - 1)][lat][lon]);
   appendData(data);
 }
 
 function appendData(data) {
-  var mainContainer = document.getElementById("myData");
-    var div = document.createElement("div");
-    div.innerHTML = 
-    'ET0HS: '       + data['ET0HS'] + 
-    'ET0IV: '       + data['ET0IV'] + 
-    'Radiação: '    + data['Radiação'] + 
-    'Temp Max: '    + data['Temp Max'] + 
-    'Temp Min: '    + data['Temp Min'] + 
-    'Temp Média: '  + data['Temp Média'] + 
-    'Umidade: '     + data['Umidade'];
-    mainContainer.appendChild(div);
+  var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
+  deleteTable(table);
+  if (!Array.isArray(data)) {
+    table.insertRow().innerHTML =
+      "<th scope='row'>" + ((document.getElementById("dia_juliano").value)).toString() + "</th>" +
+      "<td>" + data.TempMédia.toFixed(2) + "</td>" +
+      "<td>" + data.TempMax.toFixed(2) + "</td>" +
+      "<td>" + data.TempMin.toFixed(2) + "</td>" +
+      "<td>" + data.Radiação.toFixed(2) + "</td>" +
+      "<td>" + data.Umidade.toFixed(2) + "</td>" +
+      "<td>" + data.ET0HS.toFixed(2) + "</td>";
+  } else {
+    for (let index = 0; index < data.length; index++) {
+      table.insertRow().innerHTML =
+        "<th scope='row'>" + (index).toString() + "</th>" +
+        "<td>" + data[index].TempMédia.toFixed(2) + "</td>" +
+        "<td>" + data[index].TempMax.toFixed(2) + "</td>" +
+        "<td>" + data[index].TempMin.toFixed(2) + "</td>" +
+        "<td>" + data[index].Radiação.toFixed(2) + "</td>" +
+        "<td>" + data[index].Umidade.toFixed(2) + "</td>" +
+        "<td>" + data[index].ET0HS.toFixed(2) + "</td>";
+    }
+  }
+}
+
+function deleteTable(table) {
+  while (table.hasChildNodes()) {
+    table.removeChild(table.firstChild);
+  }
 }
 
 // load GEOJSON object/array to map
@@ -186,7 +203,7 @@ L.geoJSON(geojsonFeature, {
     // check if specific property is existing
     if (feature.properties.prop0) {
       layer.bindTooltip("Quadrante: " + lat + " | " + lon);
-      layer.addEventListener('click',onLayerClick,feature.properties.prop0);
+      layer.addEventListener('click', onLayerClick, feature.properties.prop0);
     }
   }
 }).addTo(map);
