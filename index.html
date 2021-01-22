@@ -19,7 +19,7 @@
   <!-- partial:index.partial.html -->
   <div class="example-container">
     <div class="row">
-      <section class="col col-2 header">Mapa Evapotraspiração Tocantins</section>
+      <section class="col col-2 header"><h2>Mapa Evapotraspiração Tocantins</h2></section>
       <section class="col col-10">
         <div class="row">
           <section class="col col-6">
@@ -30,15 +30,14 @@
                   <input id="Latitude" placeholder="Latitude" name="Location.Latitude" />
                   <!-- @Html.TextBoxFor(m => m.Location.Latitude, new {id = "Latitude", placeholder = "Latitude"}) -->
                 </label>
-              </section>
-              <section class="col col-3">
                 <label class="input">
                   <input id="Longitude" placeholder="Longitude" name="Location.Longitude" /></label>
                 </label>
-              </section>
-              <section class="col col-3">
+                </section><br>
                 <label class="input">
-                  <input id="dia_juliano" type="number" min="1" max="356" value="1">
+                    <input id="dia_juliano" type="number" min="1" max="356" value="1">
+                    <input type="checkbox" name="dois_dias" value="Dia">
+                    <input id="segundo_dia_juliano" type="number" min="1" max="356" value="1">
                 </label>
               </section>
               <section class="col col-3">
