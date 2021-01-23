@@ -143,14 +143,52 @@ var geojsonFeature = {
 function onLayerClick(num) {
   lat = num.target.feature.properties.prop1.lat;
   lon = num.target.feature.properties.prop1.lon;
-  data = (dados[parseInt((document.getElementById("dia_juliano").value) - 1)][lat][lon]);
-  appendData(data);
+  primeiroDia = parseInt(document.getElementById("dia_juliano"));
+  segundoDia = parseInt(document.getElementById("segundo_dia_juliano"));
+
+  if (segundoDia.disabled == true || (segundoDia.value >= primeiroDia.value)) {
+    recolheDadosDeUmDIa(dados[parseInt((document.getElementById("dia_juliano").value) - 1)][lat][lon]);
+  } else {
+    recolheDadosDeVariosDias(lat, lon);
+  }
+}
+
+function recolheDadosDeUmDIa(data) {
+  var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
+  deleteTable(table);
+  table.insertRow().innerHTML =
+    "<th scope='row'>" + ((document.getElementById("dia_juliano").value)).toString() + "</th>" +
+    "<td>" + data.TempMédia.toFixed(2) + "</td>" +
+    "<td>" + data.TempMax.toFixed(2) + "</td>" +
+    "<td>" + data.TempMin.toFixed(2) + "</td>" +
+    "<td>" + data.Radiação.toFixed(2) + "</td>" +
+    "<td>" + data.Umidade.toFixed(2) + "</td>" +
+    "<td>" + data.ET0HS.toFixed(2) + "</td>";
+}
+
+function recolheDadosDeVariosDias(lat, lon) {
+  var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
+  deleteTable(table);
+  primeiroDia = parseInt(document.getElementById("dia_juliano").value) - 1;
+  segundoDia = parseInt(document.getElementById("segundo_dia_juliano").value) - 1;
+
+  for (index = primeiroDia; index <= segundoDia; index++) {
+
+    table.insertRow().innerHTML =
+      "<th scope='row'>" + (index + 1).toString() + "</th>" +
+      "<td>" + dados[index][lat][lon].TempMédia.toFixed(2) + "</td>" +
+      "<td>" + dados[index][lat][lon].TempMax.toFixed(2) + "</td>" +
+      "<td>" + dados[index][lat][lon].TempMin.toFixed(2) + "</td>" +
+      "<td>" + dados[index][lat][lon].Radiação.toFixed(2) + "</td>" +
+      "<td>" + dados[index][lat][lon].Umidade.toFixed(2) + "</td>" +
+      "<td>" + dados[index][lat][lon].ET0HS.toFixed(2) + "</td>";
+  }
 }
 
 function appendData(data) {
   var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
   deleteTable(table);
-  if (!Array.isArray(data)) {
+  if (document.getElementById("segundo_dia_juliano").disabled == true) {
     table.insertRow().innerHTML =
       "<th scope='row'>" + ((document.getElementById("dia_juliano").value)).toString() + "</th>" +
       "<td>" + data.TempMédia.toFixed(2) + "</td>" +
@@ -160,7 +198,9 @@ function appendData(data) {
       "<td>" + data.Umidade.toFixed(2) + "</td>" +
       "<td>" + data.ET0HS.toFixed(2) + "</td>";
   } else {
-    for (let index = 0; index < data.length; index++) {
+    primeiroDia = document.getElementById("dia_juliano");
+    segundoDia = document.getElementById("segundo_dia_juliano");
+    for (let index = primeiroDia; index == segundoDia; index++) {
       table.insertRow().innerHTML =
         "<th scope='row'>" + (index).toString() + "</th>" +
         "<td>" + data[index].TempMédia.toFixed(2) + "</td>" +
@@ -176,6 +216,15 @@ function appendData(data) {
 function deleteTable(table) {
   while (table.hasChildNodes()) {
     table.removeChild(table.firstChild);
+  }
+}
+
+function listaDeDias() {
+  imput = document.getElementById("segundo_dia_juliano");
+  if (imput.disabled == true) {
+    imput.disabled = false;
+  } else {
+    imput.disabled = true;
   }
 }
 
