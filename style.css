@@ -1,5 +1,5 @@
 #map {
-  height: 350px;
+  height: 250px;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 
 .example-container {
   background: white;
-  width: 800px;
+  width: 1000px;
   box-sizing: border-box;
   position: absolute;
   top: 50%;
