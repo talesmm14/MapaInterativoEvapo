@@ -150,12 +150,14 @@ function onLayerClick(num) {
     recolheDadosDeUmDIa(dados[parseInt((document.getElementById("dia_juliano").value) - 1)][lat][lon]);
   } else if (segundoDia.value >= primeiroDia.value){
     recolheDadosDeVariosDias(lat, lon);
+  } else {
+    segundoDia.style.color = "red";
   }
 }
 
 function recolheDadosDeUmDIa(data) {
   var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
-  deleteTable(table);
+  deletaTabela(table);
   table.insertRow().innerHTML =
     "<th scope='row'>" + ((document.getElementById("dia_juliano").value)).toString() + "</th>" +
     "<td>" + data.TempMédia.toFixed(2) + "</td>" +
@@ -168,7 +170,7 @@ function recolheDadosDeUmDIa(data) {
 
 function recolheDadosDeVariosDias(lat, lon) {
   var table = document.getElementById('DataTable').getElementsByTagName('tbody')[0];
-  deleteTable(table);
+  deletaTabela(table);
   primeiroDia = parseInt(document.getElementById("dia_juliano").value) - 1;
   segundoDia = parseInt(document.getElementById("segundo_dia_juliano").value) - 1;
   console.log("teste");
@@ -186,14 +188,15 @@ function recolheDadosDeVariosDias(lat, lon) {
   }
 }
 
-function deleteTable(table) {
+function deletaTabela(table) {
   while (table.hasChildNodes()) {
     table.removeChild(table.firstChild);
   }
 }
 
-function listaDeDias() {
+function alteraCampoDias() {
   imput = document.getElementById("segundo_dia_juliano");
+  imput.style.color = "black";
   if (imput.disabled == true) {
     imput.disabled = false;
   } else {
