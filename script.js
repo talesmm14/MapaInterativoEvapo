@@ -160,9 +160,9 @@ function recolheDadosDeUmDIa(data) {
   deletaTabela(table);
   table.insertRow().innerHTML =
     "<th scope='row'>" + ((document.getElementById("dia_juliano").value)).toString() + "</th>" +
-    "<td>" + data.TempMédia.toFixed(2) + "</td>" +
-    "<td>" + data.TempMax.toFixed(2) + "</td>" +
-    "<td>" + data.TempMin.toFixed(2) + "</td>" +
+    "<td>" + (data.TempMédia - 273.15).toFixed(2) + "</td>" +
+    "<td>" + (data.TempMax.toFixed(2) - 273.15).toFixed(2) + "</td>" +
+    "<td>" + (data.TempMin.toFixed(2) - 273.15).toFixed(2) + "</td>" +
     "<td>" + data.Radiação.toFixed(2) + "</td>" +
     "<td>" + data.Umidade.toFixed(2) + "</td>" +
     "<td>" + data.ET0HS.toFixed(2) + "</td>";
@@ -179,9 +179,9 @@ function recolheDadosDeVariosDias(lat, lon) {
 
     table.insertRow().innerHTML =
       "<th scope='row'>" + (index + 1).toString() + "</th>" +
-      "<td>" + dados[index][lat][lon].TempMédia.toFixed(2) + "</td>" +
-      "<td>" + dados[index][lat][lon].TempMax.toFixed(2) + "</td>" +
-      "<td>" + dados[index][lat][lon].TempMin.toFixed(2) + "</td>" +
+      "<td>" + (dados[index][lat][lon].TempMédia - 273.15).toFixed(2) + "</td>" +
+      "<td>" + (dados[index][lat][lon].TempMax - 273.15).toFixed(2) + "</td>" +
+      "<td>" + (dados[index][lat][lon].TempMin - 273.15).toFixed(2) + "</td>" +
       "<td>" + dados[index][lat][lon].Radiação.toFixed(2) + "</td>" +
       "<td>" + dados[index][lat][lon].Umidade.toFixed(2) + "</td>" +
       "<td>" + dados[index][lat][lon].ET0HS.toFixed(2) + "</td>";
