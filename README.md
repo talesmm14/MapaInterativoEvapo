@@ -1,4 +1,4 @@
 # MapaInterativoEvapo
-Mapa interativo sobre evapotranspiração no Tocantins.
+Atlas Digital da Evapotranspiração de Referência do Tocantins.
 
 Autores: Tales Melquiades, Júlio cezar Candido
